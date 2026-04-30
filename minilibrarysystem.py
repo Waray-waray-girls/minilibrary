@@ -76,6 +76,18 @@ def removeBooks():
             print("Update Complete\n")
     except:
         print("An error occured")
+
+def searchBook():
+    try:
+        with open("library.txt", "r") as file:
+            books = file.read().splitlines()
+            search = input("Enter book to search: ")
+            if search in books:
+                print(f"{search} is in the library")
+            else:
+                print(f"{search} is not in the library")
+    except FileNotFoundError:
+        print("Library file not found.")
         
 while True:
     print("MINI LIBRARY SYSTEM")
@@ -83,7 +95,8 @@ while True:
     print("2. View Books")
     print("3. Update Book")
     print("4. Remove Book")
-    print("5. Exit")
+    print("5. Search Book")
+    print("6. Exit")
     try: 
         choice = int(input("Enter your choice: "))
 
@@ -100,6 +113,9 @@ while True:
             removeBooks()
 
         elif choice == 5:
+            searchBook()
+
+        elif choice == 6:
             print("Exiting the program....")
             break
 
