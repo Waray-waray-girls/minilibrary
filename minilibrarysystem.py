@@ -55,13 +55,35 @@ def updateBook():
     except FileNotFoundError:
         print("Library file not found.")
 
+def removeBooks():
+    try:
+        with open("library.txt", "r") as file:
+            books = file.read().splitlines()
+            print("\n--=Books in the Library=--")
+            print(books)
 
+            remove = input("Enter book to delete: ")
+            if remove not in books:
+                print("Book doesn't exist")
+                return
+
+            with open("library.txt", "w") as file:
+                for book in books:
+                    if book == remove:
+                        print(f"{book} succesfully removed")
+                    else:
+                        file.write(book + '\n')
+            print("Update Complete\n")
+    except:
+        print("An error occured")
+        
 while True:
     print("MINI LIBRARY SYSTEM")
     print("1. Add Book")
     print("2. View Books")
     print("3. Update Book")
-    print("4. Exit")
+    print("4. Remove Book")
+    print("5. Exit")
     try: 
         choice = int(input("Enter your choice: "))
 
@@ -73,8 +95,11 @@ while True:
             
         elif choice == 3:
             updateBook()
-
+        
         elif choice == 4:
+            removeBooks()
+
+        elif choice == 5:
             print("Exiting the program....")
             break
 
