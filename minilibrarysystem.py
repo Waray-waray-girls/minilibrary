@@ -12,11 +12,18 @@ def addBook():
         file.write(book + "\n")
         print(f"{book} added succesfully")
 
+def viewBooks():
+    with open("library.txt", "r") as file:
+        books = file.read()
+        print("\n--=Books in the Library=--")
+        print(books)
+
 
 while True:
     print("MINI LIBRARY SYSTEM")
     print("1. Add Book")
-    print("2. Exit")
+    print("2. View Books")
+    print("3. Exit")
     try: 
         choice = int(input("Enter your choice: "))
 
@@ -24,6 +31,9 @@ while True:
             addBook()
 
         elif choice == 2:
+            viewBooks()
+            
+        elif choice == 3:
             print("Exiting the program....")
             break
 
@@ -32,3 +42,5 @@ while True:
 
     except ValueError:
         print("Invalid input. Please enter a number.")
+
+    
