@@ -18,12 +18,50 @@ def viewBooks():
         print("\n--=Books in the Library=--")
         print(books)
 
+def updateBook():
+    try:
+        with open("library.txt", "r") as file:
+            books = [line.strip() for line in file.readlines()]
+
+        if not books:
+            print("The library is empty")
+            return
+        
+        print("\n--=Books in the Library=--")
+        for index, book in enumerate(books, start=1):
+            print(f"{index}. {book}")
+
+        try:
+            choice = int(input("Enter the number of the book to update: "))
+
+            if 1<= choice <= len(books):
+                newName = input("Enter new name: ")
+                oldName = books[choice-1]
+                books[choice - 1] = newName
+                
+                with open("library.txt", "w") as file:
+                    for book in books:
+                        file.write(book + "\n")
+                
+                print(f"Successfully updated '{oldName}' to '{newName}'")
+            else:
+                print("Invalid number selection.")
+
+        except ValueError:
+            print("Please enter a valid number.")
+
+    except ValueError:
+        print("Please enter a valid number.")
+    except FileNotFoundError:
+        print("Library file not found.")
+
 
 while True:
     print("MINI LIBRARY SYSTEM")
     print("1. Add Book")
     print("2. View Books")
-    print("3. Exit")
+    print("3. Update Book")
+    print("4. Exit")
     try: 
         choice = int(input("Enter your choice: "))
 
@@ -34,6 +72,9 @@ while True:
             viewBooks()
             
         elif choice == 3:
+            updateBook()
+
+        elif choice == 4:
             print("Exiting the program....")
             break
 
